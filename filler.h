@@ -6,7 +6,7 @@
 /*   By: jjaouen <jjaouen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 13:00:28 by jjaouen           #+#    #+#             */
-/*   Updated: 2017/04/03 19:37:13 by clegoube         ###   ########.fr       */
+/*   Updated: 2017/04/04 17:34:01 by clegoube         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,15 @@ typedef struct		s_game
 	int		Y_width;
 	int		piece_width;
 	char	symbol;
+	char**	map;
+	char**	piece;
 }					t_game;
 
 int		get_next_line(const int fd, char **line);
 char	**ft_strsplit(char const *s, char c);
+void	ft_stock_map(char **line, t_game *game);
+void	ft_stock_piece(char **line, t_game *game);
+void	ft_stock_struct(char **line, t_game *game);
+void	ft_strategy_game(t_game *game);
 
 #endif
