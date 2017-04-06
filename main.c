@@ -6,22 +6,28 @@
 /*   By: clegoube <clegoube@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 13:46:02 by clegoube          #+#    #+#             */
-/*   Updated: 2017/04/04 18:35:27 by clegoube         ###   ########.fr       */
+/*   Updated: 2017/04/06 20:19:46 by clegoube         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	ft_initialize_struct(t_game *game)
+int	ft_initialize_struct(t_game *game)
 {
 	game->player = 1;
 	game->symbol = 'O';
-	game->X_lenght = 0;
-	game->piece_lenght = 0;
-	game->Y_width = 0;
-	game->piece_width = 0;
+	game->map_line = 0;
+	game->piece_line = 0;
+	game->map_col = 0;
+	game->piece_col = 0;
 	game->map = NULL;
 	game->piece = NULL;
+	if (!(game->coordo = (int*)malloc(sizeof(int) * 2)))
+		return (0);
+	game->coordo[0] = 0;
+	game->coordo[1] = 0;
+	game->stars = 0;
+	return (1);
 }
 
 void	ft_free_game(t_game *game)
@@ -29,17 +35,20 @@ void	ft_free_game(t_game *game)
 	int i;
 
 	i = 0;
-	while (i < game->X_lenght)
+	while (i < game->map_line)
 		ft_strdel(&(game->map[i++]));
 	free(game->map);
 	i = 0;
-	while (i < game->piece_lenght)
+	while (i < game->piece_line)
 		ft_strdel(&(game->piece[i++]));
 	free(game->piece);
-	game->X_lenght = 0;
-	game->piece_lenght = 0;
-	game->Y_width = 0;
-	game->piece_width = 0;
+	game->map_line = 0;
+	game->piece_line = 0;
+	game->map_col = 0;
+	game->piece_col = 0;
+	game->coordo[0] = 0;
+	game->coordo[1] = 0;
+	game->stars = 0;
 }
 
 int		main(void)
@@ -61,9 +70,13 @@ int		main(void)
 	}
 	while (get_next_line(0, &line) > 0)
 	{
+		// dprintf(2, "boucle1\n");
 		ft_stock_struct(&line, game);
-		ft_strategy_game(game);
+		// dprintf(2, "boucle2\n");
+		ft_find_solutions(game);
+		// dprintf(2, "boucle3\n");
 		ft_free_game(game);
+		// dprintf(2, "boucle4\n");
 	}
 	free(game);
 	free(line);
