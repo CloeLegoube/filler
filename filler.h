@@ -26,12 +26,17 @@ typedef struct		s_coor
 	int				coordo[2];
 	int				i;
 	int				j;
+	int				distance_fighter[2];
+	int				au_dessus;
+	int				a_gauche;
 	struct s_coor	*next;
 }					t_coor;
 
 typedef struct		s_game
 {
 	int		player;
+	char	fighter;
+	int		position_fighter[2];
 	int		map_line;
 	int		piece_line;
 	int		map_col;
@@ -41,6 +46,7 @@ typedef struct		s_game
 	char**	piece;
 	int		*coordo;
 	int		stars;
+	int		strategy;
 
 }					t_game;
 

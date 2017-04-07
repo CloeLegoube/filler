@@ -16,6 +16,7 @@ int	ft_initialize_struct(t_game *game)
 {
 	game->player = 1;
 	game->symbol = 'O';
+	game->fighter = 'x';
 	game->map_line = 0;
 	game->piece_line = 0;
 	game->map_col = 0;
@@ -27,6 +28,7 @@ int	ft_initialize_struct(t_game *game)
 	game->coordo[0] = 0;
 	game->coordo[1] = 0;
 	game->stars = 0;
+	game->strategy = 0;
 	return (1);
 }
 
@@ -67,10 +69,11 @@ int		main(void)
 	{
 		game->player = 2;
 		game->symbol = 'X';
+		game->fighter = 'o';
 	}
 	while (get_next_line(0, &line) > 0)
 	{
-		// dprintf(2, "boucle1\n");
+		game->strategy = game->strategy ? 0 : 1;// dprintf(2, "boucle1\n");
 		ft_stock_struct(&line, game);
 		// dprintf(2, "boucle2\n");
 		ft_find_solutions(game);
