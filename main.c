@@ -6,7 +6,7 @@
 /*   By: clegoube <clegoube@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 13:46:02 by clegoube          #+#    #+#             */
-/*   Updated: 2017/04/06 20:19:46 by clegoube         ###   ########.fr       */
+/*   Updated: 2017/04/09 15:40:05 by clegoube         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int		main(void)
 	}
 	while (get_next_line(0, &line) > 0)
 	{
-		game->strategy = game->strategy ? 0 : 1;// dprintf(2, "boucle1\n");
+		game->strategy = game->strategy ? 0 : 1;
+		// dprintf(2, "boucle1\n");
 		ft_stock_struct(&line, game);
 		// dprintf(2, "boucle2\n");
 		ft_find_solutions(game);
