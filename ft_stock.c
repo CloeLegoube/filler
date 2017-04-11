@@ -6,7 +6,7 @@
 /*   By: clegoube <clegoube@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 12:52:19 by clegoube          #+#    #+#             */
-/*   Updated: 2017/04/11 13:26:11 by clegoube         ###   ########.fr       */
+/*   Updated: 2017/04/11 20:27:06 by clegoube         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	ft_stock_stars(t_game *game)
 
 void	ft_stock_map(char **line, t_game *game)
 {
-	int i;
-	char *sub;
+	int		i;
+	char	*sub;
 
 	i = -1;
 	get_next_line(0, line);
@@ -57,30 +57,8 @@ void	ft_stock_piece(char **line, t_game *game)
 		game->piece[i] = ft_strnew(game->piece_col + 1);
 		ft_strcpy(game->piece[i], *line);
 	}
-
-	// dprintf(2, "\n************* Resultat ************\n");
-	// i = -1;
-	// dprintf(2, "**************\nPIECE avant\n");
-	// while (++i < game->piece_line)
-	// {
-	// 	dprintf(2, "%s\n", game->piece[i]);
-	//
-	// }
 	ft_calcul_subline(game);
 	ft_calcul_subcol(game);
-	// i = -1;
-	// dprintf(2, "\nPIECE\n");
-	// while (++i < game->piece_line)
-	// {
-	// 	dprintf(2, "%s\n", game->piece[i]);
-	//
-	// }
-	// ft_putstr(ft_itoa(8));
-	// ft_putchar(' ');
-	// ft_putstr(ft_itoa(2));
-	// ft_putchar('\n');
-
-	// dprintf(2, "==> Coordo X: %d | Coordo Y: %d\n", game->coordo[0], game->coordo[1]);
 }
 
 void	ft_stock_struct(char **line, t_game *game)

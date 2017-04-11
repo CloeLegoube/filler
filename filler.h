@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filler.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjaouen <jjaouen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: clegoube <clegoube@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 13:00:28 by jjaouen           #+#    #+#             */
-/*   Updated: 2017/04/11 15:34:17 by clegoube         ###   ########.fr       */
+/*   Created: 2017/04/11 20:30:03 by clegoube          #+#    #+#             */
+/*   Updated: 2017/04/11 20:47:06 by clegoube         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,36 +34,36 @@ typedef struct		s_coor
 
 typedef struct		s_game
 {
-	int		player;
-	char	fighter;
-	int		position_fighter[2];
-	int		map_line;
-	int		piece_line;
-	int		map_col;
-	int		piece_col;
-	char	symbol;
-	char**	map;
-	char**	piece;
-	int		*coordo;
-	int		stars;
-	int		strategy;
-
+	int				player;
+	char			fighter;
+	int				position_fighter[2];
+	int				map_line;
+	int				piece_line_max;
+	int				piece_line;
+	int				map_col;
+	int				piece_col;
+	int				piece_col_max;
+	char			symbol;
+	char**			map;
+	char**			piece;
+	int				*coordo;
+	int				stars;
+	int				strategy;
 }					t_game;
 
-int		get_next_line(const int fd, char **line);
-char	**ft_strsplit(char const *s, char c);
-void	ft_stock_map(char **line, t_game *game);
-void	ft_stock_piece(char **line, t_game *game);
-void	ft_stock_struct(char **line, t_game *game);
-void	ft_stock_stars(t_game *game);
-void	ft_calcul_subline( t_game *game);
-void	ft_calcul_subcol( t_game *game);
-void	ft_find_solutions(t_game *game);
-void	ft_strategy_game(t_list **mylist, t_game *game);
-void	ft_check_fighter(t_game *game);
-int		ft_check_piece(int i, int j, t_game *game);
-int		ft_check_line_up(t_game *game, int until);
-int		ft_check_line_down(t_game *game, int until);
-
+int					get_next_line(const int fd, char **line);
+char				**ft_strsplit(char const *s, char c);
+void				ft_stock_map(char **line, t_game *game);
+void				ft_stock_piece(char **line, t_game *game);
+void				ft_stock_struct(char **line, t_game *game);
+void				ft_stock_stars(t_game *game);
+void				ft_calcul_subline(t_game *game);
+void				ft_calcul_subcol(t_game *game);
+void				ft_find_solutions(t_game *game);
+void				ft_strategy_game(t_list **mylist, t_game *game);
+void				ft_check_fighter(t_game *game);
+int					ft_check_piece(int i, int j, t_game *game);
+int					ft_check_line_up(t_game *game, int until);
+int					ft_check_line_down(t_game *game, int until);
 
 #endif

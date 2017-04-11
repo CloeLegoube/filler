@@ -6,21 +6,23 @@
 /*   By: clegoube <clegoube@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 13:46:02 by clegoube          #+#    #+#             */
-/*   Updated: 2017/04/11 13:23:43 by clegoube         ###   ########.fr       */
+/*   Updated: 2017/04/11 20:44:53 by clegoube         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int	ft_initialize_struct(t_game *game)
+int		ft_initialize_struct(t_game *game)
 {
 	game->player = 1;
 	game->symbol = 'O';
 	game->fighter = 'x';
 	game->map_line = 0;
 	game->piece_line = 0;
+	game->piece_line_max = 0;
 	game->map_col = 0;
 	game->piece_col = 0;
+	game->piece_col_max = 0;
 	game->map = NULL;
 	game->piece = NULL;
 	if (!(game->coordo = (int*)malloc(sizeof(int) * 2)))
@@ -34,7 +36,7 @@ int	ft_initialize_struct(t_game *game)
 
 void	ft_free_game(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < game->map_line)
@@ -55,12 +57,11 @@ void	ft_free_game(t_game *game)
 
 int		main(void)
 {
-	int i;
-	char *line;
-	t_game *game;
+	int		i;
+	char	*line;
+	t_game	*game;
 
 	i = 1;
-	line = NULL;
 	if (!(game = (t_game*)malloc(sizeof(t_game))))
 		return (0);
 	ft_initialize_struct(game);
@@ -74,13 +75,9 @@ int		main(void)
 	while (get_next_line(0, &line) > 0)
 	{
 		game->strategy = game->strategy ? 0 : 1;
-		// dprintf(2, "boucle1\n");
 		ft_stock_struct(&line, game);
-		// dprintf(2, "boucle2\n");
 		ft_find_solutions(game);
-		// dprintf(2, "boucle3\n");
 		ft_free_game(game);
-		// dprintf(2, "boucle4\n");
 	}
 	free(game);
 	free(line);

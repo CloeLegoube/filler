@@ -6,21 +6,23 @@
 /*   By: clegoube <clegoube@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 12:52:19 by clegoube          #+#    #+#             */
-/*   Updated: 2017/04/11 13:23:28 by clegoube         ###   ########.fr       */
+/*   Updated: 2017/04/11 20:48:19 by clegoube         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	ft_realloc_piece( t_game *game, char **piece, int subline, int subcol)
+void	ft_realloc_piece(t_game *game, char **piece, int subline, int subcol)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (i < game->piece_line)
 		ft_strdel(&(game->piece[i++]));
 	free(game->piece);
+	game->piece_line_max = game->piece_line;
 	game->piece_line = game->piece_line - subline;
+	game->piece_col_max = game->piece_col;
 	game->piece_col = game->piece_col - subcol;
 	i = -1;
 	game->piece = (char **)malloc(sizeof(char *) * (game->piece_line));
@@ -35,12 +37,12 @@ void	ft_realloc_piece( t_game *game, char **piece, int subline, int subcol)
 	free(piece);
 }
 
-void	ft_reduce_piece_line( t_game *game, int subline, int startline)
+int		ft_reduce_piece_line(t_game *game, int subline, int startline)
 {
-	int i;
-	int j;
-	int k;
-	char **piece;
+	int		i;
+	int		j;
+	int		k;
+	char	**piece;
 
 	i = 0;
 	j = 0;
@@ -60,46 +62,45 @@ void	ft_reduce_piece_line( t_game *game, int subline, int startline)
 		}
 	}
 	ft_realloc_piece(game, piece, subline, 0);
+	return (1);
 }
 
-void	ft_reduce_piece_col( t_game *game, int subcol, int startcol)
+int		ft_reduce_piece_col(t_game *game, int subcol, int startcol)
 {
-	int i;
-	int j;
-	int k;
-	int l;
-	char **piece;
+	int		i;
+	int		j;
+	int		k;
+	int		l;
+	char	**piece;
 
 	j = 0;
-	l = 0;
 	piece = (char **)malloc(sizeof(char *) * game->piece_line);
 	while (j < game->piece_line)
 	{
-			i = 0;
-			l = 0;
-			piece[j] = ft_strnew(game->piece_col - subcol + 1);
-			while (i < game->piece_col)
+		i = 0;
+		l = 0;
+		piece[j] = ft_strnew(game->piece_col - subcol + 1);
+		while (i < game->piece_col)
+			if (i == startcol)
 			{
-				if (i == startcol)
-				{
-					k = 0;
-					while (k++ < subcol)
-						i++;
-				}
-				else
-					piece[j][l++] = game->piece[j][i++];
+				k = 0;
+				while (k++ < subcol)
+					i++;
 			}
-			piece[j++][l] = '\0';
+			else
+				piece[j][l++] = game->piece[j][i++];
+		piece[j++][l] = '\0';
 	}
 	ft_realloc_piece(game, piece, 0, subcol);
+	return (1);
 }
 
-void	ft_calcul_subline( t_game *game)
+void	ft_calcul_subline(t_game *game)
 {
-	int i;
-	int j;
-	int subline;
-	int startline;
+	int		i;
+	int		j;
+	int		subline;
+	int		startline;
 
 	subline = 0;
 	startline = 0;
@@ -115,23 +116,20 @@ void	ft_calcul_subline( t_game *game)
 				startline = i;
 			subline++;
 		}
-		else if (subline)
+		else if (subline && ft_reduce_piece_line(game, subline, startline))
 		{
 			if (startline == 0)
 				game->coordo[0] = -subline;
-			ft_reduce_piece_line(game, subline, startline);
 		}
 	}
-
-
 }
 
-void	ft_calcul_subcol( t_game *game)
+void	ft_calcul_subcol(t_game *game)
 {
-	int i;
-	int j;
-	int startcol;
-	int subcol;
+	int		i;
+	int		j;
+	int		startcol;
+	int		subcol;
 
 	subcol = 0;
 	startcol = 0;
@@ -147,16 +145,10 @@ void	ft_calcul_subcol( t_game *game)
 				startcol = j;
 			subcol++;
 		}
-		else if (subcol)
+		else if (subcol && ft_reduce_piece_col(game, subcol, startcol))
 		{
 			if (startcol == 0)
 				game->coordo[1] = -subcol;
-			ft_reduce_piece_col(game, subcol, startcol);
 		}
 	}
-	// if (startcol == 0 && subcol)
-	// 	game->coordo[1] = -subcol;
-	// if (subcol)
-	// 	ft_reduce_piece_col(game, subcol, startcol);
-
 }

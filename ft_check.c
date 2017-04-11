@@ -6,7 +6,7 @@
 /*   By: clegoube <clegoube@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 13:33:31 by clegoube          #+#    #+#             */
-/*   Updated: 2017/04/11 15:27:08 by clegoube         ###   ########.fr       */
+/*   Updated: 2017/04/11 20:25:46 by clegoube         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,13 @@ int		ft_check_piece(int i, int j, t_game *game)
 	k = -1;
 	count = 0;
 	touch = 0;
-	while (++k < game->piece_line && (k + i) < game->map_line )
+	while (++k < game->piece_line && (k + i) < game->map_line)
 	{
 		l = -1;
 		while (++l < game->piece_col && (l + j) < game->map_col)
 		{
-			if (game->piece[k][l] == '*' && game->map[i + k][j + l] == game->symbol)
+			if (game->piece[k][l] == '*' &&
+				game->map[i + k][j + l] == game->symbol)
 				touch++;
 			else if (game->piece[k][l] == '*' && game->map[i + k][j + l] == '.')
 				count++;
@@ -58,7 +59,7 @@ int		ft_check_piece(int i, int j, t_game *game)
 	return (0);
 }
 
-int 	ft_check_line_up(t_game *game, int until)
+int		ft_check_line_up(t_game *game, int until)
 {
 	int i;
 
@@ -72,8 +73,7 @@ int 	ft_check_line_up(t_game *game, int until)
 	return (0);
 }
 
-
-int 	ft_check_line_down(t_game *game, int until)
+int		ft_check_line_down(t_game *game, int until)
 {
 	int i;
 

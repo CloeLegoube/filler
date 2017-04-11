@@ -6,7 +6,7 @@
 #    By: jjaouen <jjaouen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/07 16:55:10 by jjaouen           #+#    #+#              #
-#    Updated: 2017/04/11 15:47:12 by clegoube         ###   ########.fr        #
+#    Updated: 2017/04/11 16:11:41 by clegoube         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@Make -C ./libft/
+	@make -C ./libft/
 	@$(GCCF) $(SRC) $(LIB) -I $(HEAD) -o $(NAME)
 
 %.o: %.c
