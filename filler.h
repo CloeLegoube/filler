@@ -6,7 +6,7 @@
 /*   By: jjaouen <jjaouen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 13:00:28 by jjaouen           #+#    #+#             */
-/*   Updated: 2017/04/06 17:24:48 by clegoube         ###   ########.fr       */
+/*   Updated: 2017/04/11 15:34:17 by clegoube         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,11 @@ void	ft_stock_stars(t_game *game);
 void	ft_calcul_subline( t_game *game);
 void	ft_calcul_subcol( t_game *game);
 void	ft_find_solutions(t_game *game);
-t_list	*ft_strategy_game(t_list **mylist, t_game *game);
+void	ft_strategy_game(t_list **mylist, t_game *game);
+void	ft_check_fighter(t_game *game);
+int		ft_check_piece(int i, int j, t_game *game);
+int		ft_check_line_up(t_game *game, int until);
+int		ft_check_line_down(t_game *game, int until);
 
 
 #endif

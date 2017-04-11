@@ -6,7 +6,7 @@
 #    By: jjaouen <jjaouen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/07 16:55:10 by jjaouen           #+#    #+#              #
-#    Updated: 2017/04/09 19:09:46 by clegoube         ###   ########.fr        #
+#    Updated: 2017/04/11 15:47:12 by clegoube         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = clegoube.filler
 
 HEAD = filler.h
 
-SRC = main.c get_next_line.c ft_stock.c ft_game3.c ft_resize_piece.c
+SRC = main.c get_next_line.c ft_stock.c ft_game.c ft_resize_piece.c ft_check.c
 
 LIB = ./libft/libft.a
 

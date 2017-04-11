@@ -6,7 +6,7 @@
 /*   By: clegoube <clegoube@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 12:52:19 by clegoube          #+#    #+#             */
-/*   Updated: 2017/04/09 20:33:34 by clegoube         ###   ########.fr       */
+/*   Updated: 2017/04/11 13:23:28 by clegoube         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,14 @@ void	ft_calcul_subline( t_game *game)
 				startline = i;
 			subline++;
 		}
+		else if (subline)
+		{
+			if (startline == 0)
+				game->coordo[0] = -subline;
+			ft_reduce_piece_line(game, subline, startline);
+		}
 	}
-	if (startline == 0 && subline)
-		game->coordo[0] = -subline;
-	if (subline)
-		ft_reduce_piece_line(game, subline, startline);
+
 
 }
 
@@ -144,10 +147,16 @@ void	ft_calcul_subcol( t_game *game)
 				startcol = j;
 			subcol++;
 		}
+		else if (subcol)
+		{
+			if (startcol == 0)
+				game->coordo[1] = -subcol;
+			ft_reduce_piece_col(game, subcol, startcol);
+		}
 	}
-	if (startcol == 0 && subcol)
-		game->coordo[1] = -subcol;
-	if (subcol)
-		ft_reduce_piece_col(game, subcol, startcol);
+	// if (startcol == 0 && subcol)
+	// 	game->coordo[1] = -subcol;
+	// if (subcol)
+	// 	ft_reduce_piece_col(game, subcol, startcol);
 
 }

@@ -6,7 +6,7 @@
 /*   By: clegoube <clegoube@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 12:52:19 by clegoube          #+#    #+#             */
-/*   Updated: 2017/04/09 20:03:13 by clegoube         ###   ########.fr       */
+/*   Updated: 2017/04/11 13:26:11 by clegoube         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,28 @@ void	ft_stock_piece(char **line, t_game *game)
 		ft_strcpy(game->piece[i], *line);
 	}
 
-	i = -1;
-	dprintf(2, "\nPIECE\n");
-	while (++i < game->piece_line)
-	{
-		dprintf(2, "%s\n", game->piece[i]);
-
-	}
+	// dprintf(2, "\n************* Resultat ************\n");
+	// i = -1;
+	// dprintf(2, "**************\nPIECE avant\n");
+	// while (++i < game->piece_line)
+	// {
+	// 	dprintf(2, "%s\n", game->piece[i]);
+	//
+	// }
 	ft_calcul_subline(game);
 	ft_calcul_subcol(game);
+	// i = -1;
+	// dprintf(2, "\nPIECE\n");
+	// while (++i < game->piece_line)
+	// {
+	// 	dprintf(2, "%s\n", game->piece[i]);
+	//
+	// }
+	// ft_putstr(ft_itoa(8));
+	// ft_putchar(' ');
+	// ft_putstr(ft_itoa(2));
+	// ft_putchar('\n');
+
 	// dprintf(2, "==> Coordo X: %d | Coordo Y: %d\n", game->coordo[0], game->coordo[1]);
 }
 
