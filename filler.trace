@@ -1,4 +1,6 @@
-seed = 8370
-players/clegoube.filler won
+seed = 526
+O: error on input
+players/clegoube.filler: Segfault at 0
+players/superjeannot.filler won
 Score:
-53AGAINST121
+0AGAINST156

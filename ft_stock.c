@@ -6,7 +6,7 @@
 /*   By: clegoube <clegoube@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 12:52:19 by clegoube          #+#    #+#             */
-/*   Updated: 2017/04/11 20:27:06 by clegoube         ###   ########.fr       */
+/*   Updated: 2017/04/22 15:55:09 by clegoube         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,21 @@ void	ft_stock_piece(char **line, t_game *game)
 		game->piece[i] = ft_strnew(game->piece_col + 1);
 		ft_strcpy(game->piece[i], *line);
 	}
+	/* Test */
+	i = -1;
+	dprintf(2, "Avant :\n");
+	while (game->piece[++i])
+		dprintf(2, "%s\n", game->piece[i]);
+	/* Test */
 	ft_calcul_subline(game);
 	ft_calcul_subcol(game);
+	/* Test */
+	i = -1;
+	dprintf(2, "Apres :\n");
+	while (game->piece[++i])
+		dprintf(2, "%s\n", game->piece[i]);
+	dprintf(2, "-----------------\n");
+	/* Test */
 }
 
 void	ft_stock_struct(char **line, t_game *game)

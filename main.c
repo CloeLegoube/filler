@@ -6,7 +6,7 @@
 /*   By: clegoube <clegoube@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 13:46:02 by clegoube          #+#    #+#             */
-/*   Updated: 2017/04/11 20:44:53 by clegoube         ###   ########.fr       */
+/*   Updated: 2017/04/25 15:02:22 by clegoube         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,9 @@ void	ft_free_game(t_game *game)
 
 int		main(void)
 {
-	int		i;
 	char	*line;
 	t_game	*game;
 
-	i = 1;
 	if (!(game = (t_game*)malloc(sizeof(t_game))))
 		return (0);
 	ft_initialize_struct(game);
@@ -77,6 +75,10 @@ int		main(void)
 		game->strategy = game->strategy ? 0 : 1;
 		ft_stock_struct(&line, game);
 		ft_find_solutions(game);
+		// ft_putstr(ft_itoa(8));
+		// ft_putchar(' ');
+		// ft_putstr(ft_itoa(2));
+		// ft_putchar('\n');
 		ft_free_game(game);
 	}
 	free(game);
