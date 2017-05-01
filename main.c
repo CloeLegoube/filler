@@ -29,6 +29,8 @@ int		ft_initialize_struct(t_game *game)
 		return (0);
 	game->coordo[0] = 0;
 	game->coordo[1] = 0;
+	game->center[0] = 0;
+	game->center[1] = 0;
 	game->stars = 0;
 	game->strategy = 0;
 	return (1);
@@ -52,6 +54,8 @@ void	ft_free_game(t_game *game)
 	game->piece_col = 0;
 	game->coordo[0] = 0;
 	game->coordo[1] = 0;
+	game->center[0] = 0;
+	game->center[1] = 0;
 	game->stars = 0;
 }
 

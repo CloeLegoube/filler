@@ -35,7 +35,7 @@ void	ft_stock_map(char **line, t_game *game)
 	i = -1;
 	get_next_line(0, line);
 	get_next_line(0, line);
-	game->map = (char **)malloc(sizeof(char *) * (game->map_line));
+	game->map = (char **)malloc(sizeof(char *) * (game->map_line + 1));
 	while (++i < game->map_line)
 	{
 		game->map[i] = (char *)malloc(sizeof(char) * (ft_strlen(*line) + 1));
@@ -44,34 +44,50 @@ void	ft_stock_map(char **line, t_game *game)
 		free(sub);
 		get_next_line(0, line);
 	}
+	game->map[game->map_line] = NULL;
 }
+
 
 void	ft_stock_piece(char **line, t_game *game)
 {
-	int i;
+	int		i;
+	char	**piece;
+	char	*subline;
+	char	*subcol;
 
 	i = -1;
-	game->piece = (char **)malloc(sizeof(char *) * (game->piece_line));
-	while (++i < game->piece_line && get_next_line(0, line) > 0)
+	piece = (char **)malloc(sizeof(char *) * (game->piece_line_max + 1));
+	piece[game->piece_line_max] = NULL;
+	while (++i < game->piece_line_max && get_next_line(0, line) > 0)
 	{
-		game->piece[i] = ft_strnew(game->piece_col + 1);
-		ft_strcpy(game->piece[i], *line);
+		piece[i] = ft_strnew(game->piece_col_max);
+		ft_strcpy(piece[i], *line);
 	}
 	/* Test */
 	i = -1;
 	dprintf(2, "Avant :\n");
-	while (game->piece[++i])
-		dprintf(2, "%s\n", game->piece[i]);
+	while (piece[++i])
+		dprintf(2, "%s\n", piece[i]);
 	/* Test */
-	ft_calcul_subline(game);
-	ft_calcul_subcol(game);
-	/* Test */
+	subline = supp_lines(game, piece);
+	subcol = supp_cols(game, piece);
+	game->piece_line = count_char(subline, 'y');
+	game->piece_col = count_char(subcol, 'y');
+	game->piece = (char **)malloc(sizeof(char *) * (game->piece_line + 1));
+	game->piece[game->piece_line] = NULL;
+	ft_resize_piece(game, piece, subline, subcol);
+
+	game->center[0] = game->piece_line / 2 - game->coordo[0];
+	game->center[1] = game->piece_col / 2 - game->coordo[1];
 	i = -1;
 	dprintf(2, "Apres :\n");
 	while (game->piece[++i])
 		dprintf(2, "%s\n", game->piece[i]);
 	dprintf(2, "-----------------\n");
-	/* Test */
+	// i = -1;
+	// dprintf(2, "MAP :\n");
+	// while (game->map[++i])
+	// 	dprintf(2, "%s\n", game->map[i]);
 }
 
 void	ft_stock_struct(char **line, t_game *game)
@@ -89,8 +105,9 @@ void	ft_stock_struct(char **line, t_game *game)
 	if (ft_strstr(*line, "Piece"))
 	{
 		tab = ft_strsplit(*line, ' ');
-		game->piece_line = ft_atoi(tab[1]);
-		game->piece_col = ft_atoi(tab[2]);
+		game->piece_line_max = ft_atoi(tab[1]);
+		game->piece_col_max = ft_atoi(tab[2]);
 		ft_stock_piece(&*line, game);
 	}
+	ft_stock_stars(game);
 }

@@ -24,6 +24,7 @@
 typedef struct		s_coor
 {
 	int				coordo[2];
+	int				score;
 	int				i;
 	int				j;
 	int				distance_fighter[2];
@@ -47,6 +48,7 @@ typedef struct		s_game
 	char**			map;
 	char**			piece;
 	int				*coordo;
+	int				center[2];
 	int				stars;
 	int				strategy;
 }					t_game;
@@ -57,13 +59,20 @@ void				ft_stock_map(char **line, t_game *game);
 void				ft_stock_piece(char **line, t_game *game);
 void				ft_stock_struct(char **line, t_game *game);
 void				ft_stock_stars(t_game *game);
-void				ft_calcul_subline(t_game *game);
-void				ft_calcul_subcol(t_game *game);
+void				ft_resize_piece(t_game *game, char **piece, char *subline,
+	 				char *subcol);
+int					count_char(char *s, char c);
+char				*supp_lines(t_game *game, char **piece);
+char				*supp_cols(t_game *game, char **piece);
+// void				ft_calcul_subline(t_game *game);
+// void				ft_calcul_subcol(t_game *game);
 void				ft_find_solutions(t_game *game);
 void				ft_strategy_game(t_list **mylist, t_game *game);
+int					ft_calcul_score(int i, int j, t_game *game);
 void				ft_check_fighter(t_game *game);
 int					ft_check_piece(int i, int j, t_game *game);
-int					ft_check_line_up(t_game *game, int until);
+int					ft_check_line(t_game *game, int line);
+int					ft_check_col(t_game *game, int col);
 int					ft_check_line_down(t_game *game, int until);
 
 #endif
